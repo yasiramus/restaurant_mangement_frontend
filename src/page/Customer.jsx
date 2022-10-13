@@ -29,6 +29,9 @@ const Customer = () => {
 
         try {
 
+            // const getData = await axios.get(`/`);  
+            // console.log(getData,'hh');
+
             // req to the database
             const addHeadCountData = await axios.post(`saveCustomerData/`, {headCount});            
             
@@ -36,6 +39,7 @@ const Customer = () => {
             setHeadCount("");
             
             const { data } = addHeadCountData;
+            console.log(data,'data');
 
             if (data) {
                 
