@@ -12,7 +12,8 @@ import { useState } from "react";
 
 import axios from "axios";
 
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import Success from "../modal/Success";
 
 const Owner = () => {
 
@@ -24,7 +25,9 @@ const Owner = () => {
 
     const [chairPerTableError, setChairPerTableError] = useState(""); 
 
-    const redirect = useNavigate();
+    const [isOpen, setIsOpen] = useState(false);
+
+    // const redirect = useNavigate();
 
     // a fxn to make the api call
     const AddItems = async (event) => {
@@ -57,7 +60,7 @@ const Owner = () => {
             
             const { data } = addData;
 
-            (data) ? redirect("/", { replace: true }) : setError("something went wrong");
+            (data) ? setIsOpen(true) : setError("something went wrong");
             
         } catch (error) {
 
@@ -72,6 +75,8 @@ const Owner = () => {
     return (
       
         <>
+            <Success open={isOpen} close={() => setIsOpen(false)} />
+            
             <div className="flex ">
 
                 {/* input form section  */}
