@@ -17,4 +17,11 @@ body {
 
   font-family: 'Roboto', sans-serif;
   overflow-x: hidden;
+
+}
+
+.overlay{
+   
+  background-color: rgba(17, 17, 17, 0.623);
+
 }

@@ -1,7 +1,9 @@
 import Home from "./page/Home";
 
 import { Routes, Route } from "react-router-dom";
+
 import Customer from "./page/Customer";
+
 import Owner from "./page/Owner";
 
 const App = () => {

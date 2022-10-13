@@ -1,3 +1,4 @@
+// importation of images 
 import food from "../image/customer/food.png";
 import food1 from "../image/customer/food1.png";
 import food2 from "../image/customer/food2.png";
@@ -5,9 +6,55 @@ import food4 from "../image/customer/food4.png";
 import food5 from "../image/customer/food5.png";
 import food3 from "../image/customer/food3.png";
 
-import { Link } from "react-router-dom";
+import axios from "axios";
+
+import { useState } from "react";
+
+import Modal from "../modal/Modal";
 
 const Customer = () => {
+
+    const [headCount, setHeadCount] = useState(0);
+
+    const [sucess, setSuccess] = useState("");
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    const [error, setError] = useState("");
+
+    // a fxn to make the api call
+    const AddHeadCount = async (event) => {
+      
+        event.preventDefault();
+
+        try {
+
+            // req to the database
+            const addHeadCountData = await axios.post(`saveCustomerData`, {headCount});            
+            
+            // clearing the input field after the user submit data
+            setHeadCount("");
+            
+            const { data } = addHeadCountData;
+
+            if (data) {
+                
+                setIsOpen(true);
+
+                setSuccess(data);
+
+            }
+
+            
+        } catch (error) {
+
+            console.log(error.message);
+
+            setError(error.message)
+            
+        }
+            
+    };
 
     return (
       
@@ -15,24 +62,33 @@ const Customer = () => {
             <div className="flex ">
 
                 {/* input form section  */}
-                <form method="post" className="flex-1 container m-auto">
+                <form className="flex-1 container m-auto">
 
                     <h1 className="mb-8 text-6xl text-pink-800 text-center not-italic font-extrabold capitalize">Table booking</h1>  
 
+                    <p className="my-4 text-lg text-red-800 text-center not-italic font-normal capitalize">{error}</p>  
+                    
                     <label htmlFor="headCount" className="my-2 mx-8 text-xl font-normal text-pink-500">Number of people</label>
 
-                    <input autoComplete="off" type="number" placeholder="input number of headcount" id="headCount" className="placeholder:text-pink-200 text-pink-500 outline-0 border-2 w-full my-2 mx-8 py-3 px-5 rounded border-orange-500"/>
+                    <input value={headCount} onChange={event => setHeadCount(event.target.value)} autoComplete="off" type="number" placeholder="input number of headcount" id="headCount" className="placeholder:text-pink-200 text-pink-500 outline-0 border-2 w-full my-2 mx-8 py-3 px-5 rounded border-orange-500"/>
 
-                    
                     <div className="text-center">
 
-                        <button className="py-2 w-1/2  mx-10 mt-8 bg-gradient-to-r from-orange-500 to-pink-500 text-base text-white capitalize font-normal rounded-lg shadow-md hover:bg-yellow-700  focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-75">
+                        <button onClick={AddHeadCount} disabled={!headCount} className="py-2 w-1/2  mx-10 mt-8 bg-gradient-to-r from-orange-500 to-pink-500 text-base text-white capitalize font-normal rounded-lg shadow-md hover:bg-yellow-700  focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-75">
 
-                            <Link to={"/"}>submit</Link>
+                            add head count
 
                         </button>
                         
                     </div>
+
+                    <Modal open={isOpen} close={(e) =>
+                        
+                       ( e.preventDefault(),
+                
+                        setIsOpen(false) )
+
+                    }>{sucess}</Modal>
 
                 </form>
 
