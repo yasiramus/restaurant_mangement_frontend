@@ -48,7 +48,7 @@ const Owner = () => {
             }
 
             // req to the database
-            const addData = await axios.post(`saveOwnerData`, newItems);            
+            const addData = await axios.post(`saveOwnerData/`, newItems);            
             
             // clearing the input field after the user submit data
             setNumberOfTable("");

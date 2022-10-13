@@ -30,7 +30,7 @@ const Customer = () => {
         try {
 
             // req to the database
-            const addHeadCountData = await axios.post(`saveCustomerData`, {headCount});            
+            const addHeadCountData = await axios.post(`saveCustomerData/`, {headCount});            
             
             // clearing the input field after the user submit data
             setHeadCount("");
