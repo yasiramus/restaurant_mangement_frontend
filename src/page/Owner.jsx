@@ -64,7 +64,7 @@ const Owner = () => {
             
         } catch (error) {
 
-            console.log(error.message);
+            // console.log(error.message);
             
             setError(error.message)
         }

@@ -29,9 +29,6 @@ const Customer = () => {
 
         try {
 
-            // const getData = await axios.get(`/`);  
-            // console.log(getData,'hh');
-
             // req to the database
             const addHeadCountData = await axios.post(`saveCustomerData/`, {headCount});            
             
@@ -39,7 +36,6 @@ const Customer = () => {
             setHeadCount("");
             
             const { data } = addHeadCountData;
-            console.log(data,'data');
 
             if (data) {
                 
@@ -52,7 +48,7 @@ const Customer = () => {
             
         } catch (error) {
 
-            console.log(error.message);
+            //console.log(error.message);
 
             setError(error.message)
             
